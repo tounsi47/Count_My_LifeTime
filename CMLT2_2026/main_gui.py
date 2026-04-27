@@ -16,7 +16,7 @@ def init_module() :
 
 
 try : 
-    if sys.platform.startswith("linux") or sys.platform == "darwin" :
+    if sys.platform.startswith("linux") :
         if "DISPLAY" not in os.environ :
             failed = True
             print("Error, no graphic server detected !!")
