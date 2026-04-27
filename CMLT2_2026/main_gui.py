@@ -12,7 +12,7 @@ def init_module() :
         global QtWidgets, Qt, QtGui
         import PyQt6.QtWidgets as QtWidgets 
         from PyQt6.QtCore import Qt
-        import PyQt6.QtGui as QtGui## this is whre ewe will use Qfont
+        import PyQt6.QtGui as QtGui## this is where we will use Qfont
 
 
 try : 
@@ -32,3 +32,15 @@ except ModuleNotFoundError:
     failed = True
     print("Error, the PyQt6 module is required to make the app work, without it you can't use the graphic interface !!")
     switch_to_console()
+    sys.exit(0)
+
+class MainWindow(QtWidgets.QMainWindow):
+    def __init__(self) :
+        super().__init__()
+        self.setWindowTitle("Cout My Lifetime V2.0 2026")
+        self.resize(1300, 700)
+
+app = QtWidgets.QApplication(sys.argv)
+window = MainWindow()
+window.show()
+app.exec()
