@@ -30,6 +30,14 @@ def linux_package_fallback():
     subprocess.Popen([sys.executable, install_package_linux_path])
     sys.exit()
 
+    
+
+#defining a few buttons' action :
+def quit():
+    app.quit()
+    sys.exit()
+
+
 try :
     if sys.platform.startswith("linux") :
         if "DISPLAY" not in os.environ :
@@ -65,17 +73,54 @@ except :
     else :
         switch_to_console()
 class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self) :
+    def __init__(self, ) :
         super().__init__()
-        self.setWindowTitle("Count My Lifetime V2.0 2026")
-        self.resize(900, 500)
-        self.font = QtGui.QFont("Arial", 25)
-        self.label = QtWidgets.QLabel("Let's Count your lifetime !!!")
-        self.label.setFont(self.font)
-        self.label.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.Layout = QtWidgets.QWidget.layout(self)
-        self.Layout.addWidget(self.label)
-        self.setCentralWidget(self.label)
+        self.setWindowTitle("Count My LifeTime V2.0 2026")
+        self.resize(1000, 500)
+        central_widget = QtWidgets.QWidget()
+        layout = QtWidgets.QVBoxLayout()
+    
+
+        sub_layout1 = QtWidgets.QHBoxLayout()
+        btn_quit = QtWidgets.QPushButton("exit")
+        btn_quit.clicked.connect(quit)
+        btn_about = QtWidgets.QPushButton("about CMLT")
+        sb1_elements = [btn_quit, btn_about]  # sb1_elemnts = sub_layout_1 elemnts
+        for i in sb1_elements :
+            sub_layout1.addWidget(i, alignment=Qt.AlignmentFlag.AlignTop)
+        
+        sub_layout2 = QtWidgets.QHBoxLayout()
+        order_text = QtWidgets.QLabel("Please enter your birthdate , then submit it from the button nearby  ")
+        birthday_list = QtWidgets.QDateEdit()
+        submit = QtWidgets.QPushButton("Submit and Fetch")
+        sb2_elements = [order_text, birthday_list, submit]
+        for i in sb2_elements :
+            sub_layout2.addWidget(i, alignment = Qt.AlignmentFlag.AlignVCenter)
+        
+        sub_layout3 = QtWidgets.QHBoxLayout()
+        btn_seconds = QtWidgets.QPushButton("Convert to Seconds")
+        btn_minutes = QtWidgets.QPushButton("Convert to Minutes")
+        btn_hours = QtWidgets.QPushButton("Convert to Hours")
+        sb3_elements = [btn_seconds, btn_minutes, btn_hours]
+        for i in sb3_elements :
+            sub_layout3.addWidget(i)
+
+        sub_layout4 = QtWidgets.QHBoxLayout()
+        btn_days = QtWidgets.QPushButton("Convert to Days")
+        btn_weeks = QtWidgets.QPushButton("Convert to Weeks")
+        btn_months = QtWidgets.QPushButton("Convert to Months")
+        sb4_elements = [btn_days, btn_weeks, btn_months]
+        for i in sb4_elements :
+            sub_layout4.addWidget(i)
+        
+
+        sub_layouts = [sub_layout1, sub_layout2, sub_layout3 , sub_layout4]
+        for i in sub_layouts  :
+            layout.addLayout(i)
+        central_widget.setLayout(layout)
+        self.setCentralWidget(central_widget)
+
+            
 app = QtWidgets.QApplication(sys.argv)
 window = MainWindow()
 window.show()
