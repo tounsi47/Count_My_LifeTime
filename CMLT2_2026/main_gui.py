@@ -1,4 +1,5 @@
 from date_time_retrieving import input_age_reformulation
+from unites import TimeUnites
 import os, sys, subprocess, time
 
 failed = False
@@ -12,9 +13,10 @@ def switch_to_console() :
         sys.exit(1)
 
 def init_gui_modules() :
-        global QtWidgets, Qt, QtGui
+        global QtWidgets, Qt, QtGui, QDate
         import PySide6.QtWidgets as QtWidgets 
         from PySide6.QtCore import Qt
+        from PySide6.QtCore import QDate
         import PySide6.QtGui as QtGui## this is where we will use Qfont
 def call_flip_flop_restarter():
     current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -36,6 +38,15 @@ def linux_package_fallback():
 def quit():
     app.quit()
     sys.exit()
+    
+
+
+
+
+
+ 
+    
+
 
 
 try :
@@ -73,7 +84,7 @@ except :
     else :
         switch_to_console()
 class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self, ) :
+    def __init__(self) :
         super().__init__()
         self.setWindowTitle("Count My LifeTime V2.0 2026")
         self.resize(1000, 500)
@@ -90,15 +101,17 @@ class MainWindow(QtWidgets.QMainWindow):
             sub_layout1.addWidget(i, alignment=Qt.AlignmentFlag.AlignTop)
         
         sub_layout2 = QtWidgets.QHBoxLayout()
-        order_text = QtWidgets.QLabel("Please enter your birthdate , then submit it from the button nearby  ")
-        birthday_list = QtWidgets.QDateEdit()
-        submit = QtWidgets.QPushButton("Submit and Fetch")
-        sb2_elements = [order_text, birthday_list, submit]
+        order_text = QtWidgets.QLabel("Please enter your birthdate , then choose one of the conversion options below :  ")
+        self.birthday_list = QtWidgets.QDateEdit()
+        submit = QtWidgets.QPushButton("Submit")
+        submit.clicked.connect(self.fetch_data)
+        sb2_elements = [order_text, self.birthday_list, submit]
         for i in sb2_elements :
             sub_layout2.addWidget(i, alignment = Qt.AlignmentFlag.AlignVCenter)
         
         sub_layout3 = QtWidgets.QHBoxLayout()
         btn_seconds = QtWidgets.QPushButton("Convert to Seconds")
+        #btn_seconds.clicked.connect()
         btn_minutes = QtWidgets.QPushButton("Convert to Minutes")
         btn_hours = QtWidgets.QPushButton("Convert to Hours")
         sb3_elements = [btn_seconds, btn_minutes, btn_hours]
@@ -119,7 +132,45 @@ class MainWindow(QtWidgets.QMainWindow):
             layout.addLayout(i)
         central_widget.setLayout(layout)
         self.setCentralWidget(central_widget)
+    def fetch_data(self):
+        
+        qdate =  self.birthday_list.date()
 
+        day = qdate.day()
+        month = qdate.month()
+        year = qdate.year()
+
+        input_age = input_age_reformulation(day, month, year).retrieve_input_age()
+
+        self.total_age = input_age[0]
+        self.rest_of_days = input_age[1]
+        print(self.total_age, self.rest_of_days)
+        
+
+    
+class Results(MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Results : ")
+        self.resize(750, 225)
+        second_widget = QtWidgets.QWidget()
+        layout = QtWidgets.QVBoxLayout()
+
+        sub_layout1 = QtWidgets.QHboxLayout()
+        Result = QtWidgets.QLabel("Results")
+        sub_layout1.addWidget(Result, alignment  = Qt.AlignmentFlag.AlignHCenter)
+        layout.addWidget(sub_layout1)
+
+
+        sub_layout2 = QtWidgets.HBoxLayout()
+        total_age  = QtWidgets.QLabel(f"Total age : {self.total_age} years and {self.rest_of_days}")
+
+
+
+
+        second_widget.setCentralLayout(layout)   
+    
+        
             
 app = QtWidgets.QApplication(sys.argv)
 window = MainWindow()
