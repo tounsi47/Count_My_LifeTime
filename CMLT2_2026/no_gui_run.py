@@ -1,6 +1,6 @@
 print("Count my Lifetime version 2.0")
 print("First, we need to calculate your age")
-print("Please, type your birth date : ")
+print("Please type your birth date : ")
 from date_time_retrieving import input_age_reformulation
 from unites import TimeUnites 
 
@@ -25,25 +25,25 @@ while restart  :
         option = int(input(">>>"))
         if option == 1 : 
             age_in_seconds = TimeUnites(input_age).convert_to_seconds()
-            print(f"{int(age_in_seconds)} secondes")
+            print(f"{round(age_in_seconds)} secondes")
         elif option == 2 : 
             age_in_minutes = TimeUnites(input_age).convert_to_minutes()
-            print(f"{int(age_in_minutes)} minutes")
+            print(f"{round(age_in_minutes)} minutes")
         elif option == 3 : 
             age_in_hours = TimeUnites(input_age).convert_to_hours()
-            print(f"{int(age_in_hours)} hours")
+            print(f"{round(age_in_hours)} hours")
 
         elif option == 4 : 
             age_in_days = TimeUnites(input_age).convert_to_days()
-            print(f"{int(age_in_days)} days")
+            print(f"{round(age_in_days)} days")
 
         elif option == 5 : 
             age_in_weeks = TimeUnites(input_age).convert_to_weeks()
-            print(f"{int(age_in_weeks)} weeks")
+            print(f"{round(age_in_weeks)} weeks")
 
         elif option == 6 : 
             age_in_months = TimeUnites(input_age).convert_to_months()
-            print(f"{int(age_in_months)} months")
+            print(f"{round(age_in_months)} months")
         else : 
             print("Invalid choice .")
         retry  = input("Do you want to restart ?   ")
