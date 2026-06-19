@@ -2,7 +2,7 @@ print("Count my Lifetime version 2.0")
 print("First, we need to calculate your age")
 print("Please type your birth date : ")
 from date_time_retrieving import input_age_reformulation
-from unites import TimeUnites 
+from time_unites import TimeUnites 
 
 restart = True
 while restart  :
@@ -10,7 +10,10 @@ while restart  :
         day = int(input("your birth day :"))
         month = int(input("your birth month : "))
         year = int(input("your birth year :"))
-        input_age = input_age_reformulation(day, month, year).retrieve_input_age()
+        birthdate = input_age_reformulation(day, month, year)
+        birth_year = birthdate.year
+        input_age = birthdate.retrieve_input_age()
+        
         if input_age[0] < 0 :
             print("seems like you were born in the future :0")
         elif input_age[0] == 0 :
@@ -34,7 +37,7 @@ while restart  :
             print(f"{round(age_in_hours)} hours")
 
         elif option == 4 : 
-            age_in_days = TimeUnites(input_age).convert_to_days()
+            age_in_days = TimeUnites(input_age).convert_to_days(birth_year)
             print(f"{round(age_in_days)} days")
 
         elif option == 5 : 

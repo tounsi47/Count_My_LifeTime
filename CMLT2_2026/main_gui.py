@@ -1,5 +1,5 @@
 from date_time_retrieving import input_age_reformulation
-from unites import TimeUnites
+from time_unites import TimeUnites
 import os, sys, subprocess, time
 
 failed = False
@@ -115,8 +115,8 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_seconds.clicked.connect(self.convert_to_seconds)
         
         btn_minutes = QtWidgets.QPushButton("Convert to Minutes")
-        btn_minutes.clicked.connect(self.convert_to_minutes
-                                    )
+        btn_minutes.clicked.connect(self.convert_to_minutes)
+
         btn_hours = QtWidgets.QPushButton("Convert to Hours")
         btn_hours.clicked.connect(self.convert_to_hours)
 
@@ -127,6 +127,7 @@ class MainWindow(QtWidgets.QMainWindow):
         sub_layout4 = QtWidgets.QHBoxLayout()
         btn_days = QtWidgets.QPushButton("Convert to Days")
         btn_days.clicked.connect(self.convert_to_days)
+
         btn_weeks = QtWidgets.QPushButton("Convert to Weeks")
         btn_weeks.clicked.connect(self.convert_to_weeks)
         btn_months = QtWidgets.QPushButton("Convert to Months")
@@ -148,8 +149,10 @@ class MainWindow(QtWidgets.QMainWindow):
         day = int(qdate.day())
         month = int(qdate.month())
         year = int(qdate.year())
+        self.birthdate = input_age_reformulation(day, month, year)
+        self.input_age = self.birthdate.retrieve_input_age()
+        self.birth_year = self.birthdate.year
 
-        self.input_age = input_age_reformulation(day, month, year).retrieve_input_age()
 
         self.total_age = self.input_age[0]
         self.rest_of_days = self.input_age[1]
@@ -166,7 +169,7 @@ class MainWindow(QtWidgets.QMainWindow):
         age_in_hours = TimeUnites(self.input_age).convert_to_hours()
         print(age_in_hours)
     def convert_to_days(self):
-        age_in_days = TimeUnites(self.input_age).convert_to_days()
+        age_in_days = TimeUnites(self.input_age).convert_to_days(self.birth_year)
         print(age_in_days)
     def convert_to_weeks(self):
         age_in_weeks  = TimeUnites(self.input_age).convert_to_weeks()
