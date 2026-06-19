@@ -17,7 +17,7 @@ def init_gui_modules() :
         import PySide6.QtWidgets as QtWidgets 
         from PySide6.QtCore import Qt
         from PySide6.QtCore import QDate
-        import PySide6.QtGui as QtGui## this is where we will use Qfont
+        import PySide6.QtGui as QtGui
 def call_flip_flop_restarter():
     current_directory = os.path.dirname(os.path.abspath(__file__))
     flip_and_flop_path = os.path.join(current_directory, "flip_and_flop.py")
