@@ -110,18 +110,27 @@ class MainWindow(QtWidgets.QMainWindow):
             sub_layout2.addWidget(i, alignment = Qt.AlignmentFlag.AlignVCenter)
         
         sub_layout3 = QtWidgets.QHBoxLayout()
+        
         btn_seconds = QtWidgets.QPushButton("Convert to Seconds")
-        #btn_seconds.clicked.connect()
+        btn_seconds.clicked.connect(self.convert_to_seconds)
+        
         btn_minutes = QtWidgets.QPushButton("Convert to Minutes")
+        btn_minutes.clicked.connect(self.convert_to_minutes
+                                    )
         btn_hours = QtWidgets.QPushButton("Convert to Hours")
+        btn_hours.clicked.connect(self.convert_to_hours)
+
         sb3_elements = [btn_seconds, btn_minutes, btn_hours]
         for i in sb3_elements :
             sub_layout3.addWidget(i)
 
         sub_layout4 = QtWidgets.QHBoxLayout()
         btn_days = QtWidgets.QPushButton("Convert to Days")
+        btn_days.clicked.connect(self.convert_to_days)
         btn_weeks = QtWidgets.QPushButton("Convert to Weeks")
+        btn_weeks.clicked.connect(self.convert_to_weeks)
         btn_months = QtWidgets.QPushButton("Convert to Months")
+        btn_months.clicked.connect(self.convert_to_months)
         sb4_elements = [btn_days, btn_weeks, btn_months]
         for i in sb4_elements :
             sub_layout4.addWidget(i)
@@ -136,19 +145,37 @@ class MainWindow(QtWidgets.QMainWindow):
         
         qdate =  self.birthday_list.date()
 
-        day = qdate.day()
-        month = qdate.month()
-        year = qdate.year()
+        day = int(qdate.day())
+        month = int(qdate.month())
+        year = int(qdate.year())
 
-        input_age = input_age_reformulation(day, month, year).retrieve_input_age()
+        self.input_age = input_age_reformulation(day, month, year).retrieve_input_age()
 
-        self.total_age = input_age[0]
-        self.rest_of_days = input_age[1]
+        self.total_age = self.input_age[0]
+        self.rest_of_days = self.input_age[1]
         print(self.total_age, self.rest_of_days)
+        return self.input_age
+    def convert_to_seconds(self):
+        age_in_seconds = TimeUnites(self.input_age).convert_to_seconds()
         
-
+        print(age_in_seconds)
+    def convert_to_minutes(self):
+        age_in_minutes = TimeUnites(self.input_age).convert_to_minutes()
+        print(age_in_minutes)
+    def convert_to_hours(self):
+        age_in_hours = TimeUnites(self.input_age).convert_to_hours()
+        print(age_in_hours)
+    def convert_to_days(self):
+        age_in_days = TimeUnites(self.input_age).convert_to_days()
+        print(age_in_days)
+    def convert_to_weeks(self):
+        age_in_weeks  = TimeUnites(self.input_age).convert_to_weeks()
+        print(age_in_weeks)
+    def convert_to_months(self):
+        age_in_months = TimeUnites(self.input_age).convert_to_months()
+        print(age_in_months)
     
-class Results(MainWindow):
+class Results(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Results : ")
@@ -156,18 +183,14 @@ class Results(MainWindow):
         second_widget = QtWidgets.QWidget()
         layout = QtWidgets.QVBoxLayout()
 
-        sub_layout1 = QtWidgets.QHboxLayout()
+        sub_layout1 = QtWidgets.QHBoxLayout()
         Result = QtWidgets.QLabel("Results")
         sub_layout1.addWidget(Result, alignment  = Qt.AlignmentFlag.AlignHCenter)
-        layout.addWidget(sub_layout1)
-
-
-        sub_layout2 = QtWidgets.HBoxLayout()
-        total_age  = QtWidgets.QLabel(f"Total age : {self.total_age} years and {self.rest_of_days}")
-
-
-
-
+        layout.addLayout(sub_layout1)
+        sub_layout2 = QtWidgets.QHBoxLayout()
+        self.total_age  = QtWidgets.QLabel(f"Total age : {self.total_age} years and {self.rest_of_days}")
+        sub_layout2.addWidget(self.total_age)
+        layout.addLayout(sub_layout2)
         second_widget.setCentralLayout(layout)   
     
         
