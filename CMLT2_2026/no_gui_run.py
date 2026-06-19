@@ -10,9 +10,10 @@ while restart  :
         day = int(input("your birth day :"))
         month = int(input("your birth month : "))
         year = int(input("your birth year :"))
-        birthdate = input_age_reformulation(day, month, year)
-        birth_year = birthdate.year
-        input_age = birthdate.retrieve_input_age()
+        
+        
+        input_age = input_age_reformulation(year, month, day).retrieve_input_age()
+        
         
         if input_age[0] < 0 :
             print("seems like you were born in the future :0")
@@ -37,7 +38,7 @@ while restart  :
             print(f"{round(age_in_hours)} hours")
 
         elif option == 4 : 
-            age_in_days = TimeUnites(input_age).convert_to_days(birth_year)
+            age_in_days = TimeUnites(input_age).convert_to_days(year)
             print(f"{round(age_in_days)} days")
 
         elif option == 5 : 
