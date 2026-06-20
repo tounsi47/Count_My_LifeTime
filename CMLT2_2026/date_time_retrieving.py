@@ -13,7 +13,7 @@ class input_age_reformulation :
         self.birthdate = datetime.date(self.year, self.month, self.day)
         self.input_age = (today.year - self.birthdate.year) + (today.month -  self.birthdate.month)/12 + (today.day - self.birthdate.day)/self.AVERAGE_DAYS_PER_YEAR
         self.natural_input_age = int(self.input_age)
-        self.rest_of_days = int((self.input_age - self.natural_input_age) * self.AVERAGE_DAYS_PER_YEAR)
+        self.rest_of_days = round((self.input_age - self.natural_input_age) * self.AVERAGE_DAYS_PER_YEAR)
         retreived_input_age = [self.natural_input_age, self.rest_of_days]
         return retreived_input_age
         

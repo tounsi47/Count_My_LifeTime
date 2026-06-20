@@ -149,7 +149,7 @@ class MainWindow(QtWidgets.QMainWindow):
         day = int(qdate.day())
         month = int(qdate.month())
         year = int(qdate.year())
-        self.birthdate = input_age_reformulation(day, month, year)
+        self.birthdate = input_age_reformulation(year, month, day)
         self.input_age = self.birthdate.retrieve_input_age()
         self.birth_year = self.birthdate.year
 

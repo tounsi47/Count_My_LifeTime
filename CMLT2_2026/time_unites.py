@@ -22,14 +22,14 @@ class TimeUnites:
         initial_bisextil_days1 = (today_year_by_4 + today_year_by_400)  - today_year_by_100
 
         
-        birth_year_by_4 = int(birth_year/4)
-        birth_year_by_100 = int(birth_year/100)
-        birth_year_by_400 = int(birth_year/400)
+        birth_year_by_4 = birth_year//4
+        birth_year_by_100 = birth_year//100
+        birth_year_by_400 = birth_year//400
         initial_bisextil_days2 = (birth_year_by_4 + birth_year_by_400) - birth_year_by_100
 
         bisextil_days_difference =  initial_bisextil_days1 - initial_bisextil_days2
 
-        age_in_days = (self.input_age[0] * 365) + bisextil_days_difference
+        age_in_days = (self.input_age[0] * 365) + bisextil_days_difference + self.input_age[1]
         
         #age_in_days = (self.input_age[0] * self.AVERAGE_DAYS_PER_YEAR)  + (self.input_age[1])
         return age_in_days
