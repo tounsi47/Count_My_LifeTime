@@ -16,9 +16,9 @@ class TimeUnites:
         age_in_hours = round((self.input_age[0] * (self.AVERAGE_DAYS_PER_YEAR * 24))  + (self.input_age[1] * 24))
         return age_in_hours
     def convert_to_days(self, birth_year):
-        today_year_by_4 = int(today.year/4)
-        today_year_by_100 = int(today.year/100)
-        today_year_by_400 = int(today.year/400)
+        today_year_by_4 = today.year/4
+        today_year_by_100 = today.year/100
+        today_year_by_400 = today.year/400
         initial_bisextil_days1 = (today_year_by_4 + today_year_by_400)  - today_year_by_100
 
         
